@@ -24,8 +24,10 @@ class PythonSetuptoolsConan(ConanFile):
         env = {"PYTHONPATH": py_path}
         os.makedirs(py_path)
         with tools.chdir("setuptools-" + self.version), tools.environment_append(env):
-            self.run("python bootstrap.py")
-            self.run('python setup.py install --optimize=1 --prefix= --root="%s"' % self.package_folder)
+            self.run('echo "XXX $PYTHONPATH -- $PYTHON -- $PYTHONHOME"')
+            self.run('python3 -c "import sys; print(sys.path)"')
+            self.run("python3 bootstrap.py")
+            self.run('python3 setup.py install --optimize=1 --prefix= --root="%s"' % self.package_folder)
 
     def package_info(self):
         self.env_info.PYTHONPATH.append(os.path.join(self.package_folder, "lib", "python3.7", "site-packages"))
