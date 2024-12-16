@@ -24,7 +24,7 @@ class PythonSetuptoolsConan(ConanFile):
 
     def build_requirements(self):
         if self._use_custom_python:
-            self.requires("cpython/[~{}]".format(self._python_version))
+            self.requires("cpython/[~{}]@camposs/stable".format(self._python_version))
             self.build_requires("python-pip/24.3.1@camposs/stable")
 
     def layout(self):
